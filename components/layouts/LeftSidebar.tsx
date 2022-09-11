@@ -20,9 +20,9 @@ import NotificationsMenuBlack from '../../public/svgs/LightThemeSvgs/Notificatio
 
 export default function LeftSidebar() {
 
-    const [pathnameIsHome, setPathnameIsHome] = React.useState("")
-    const [pathnameIsExplore, setPathnameIsExplore] = React.useState("")
-    const [pathnameIsMyProfile, setPathnameIsMyProfile] = React.useState("")
+    const [pathnameIsHome, setPathnameIsHome] = React.useState(Boolean(""))
+    const [pathnameIsExplore, setPathnameIsExplore] = React.useState(Boolean(""))
+    const [pathnameIsMyProfile, setPathnameIsMyProfile] = React.useState(Boolean(""))
 
     React.useEffect(() => {
         if (window.location.pathname === "/") {
