@@ -24,7 +24,7 @@ function Auth() {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [LoginEmailAddress, setLoginEmailAddress] = useState("")
   const [UploadProfilePhoto, setUploadProfilePhoto] = useState("")
-  const gettingUserDetails = useSelector((state: Array) => state.ReduxCommands.LoginDetails);
+  const gettingUserDetails = useSelector((state: any) => state.ReduxCommands.LoginDetails);
 
   function handleCloseSignupModal() {
     setShowLoginModal(false)
