@@ -71,8 +71,10 @@ function Auth() {
         method: "POST",
         body: formdata
       })
-      result = await result.json()
-      if (result.email === EmailAddress) {
+    let output:any = ""
+    output = await result.json()
+//       result = await result.json()
+      if (output.email === EmailAddress) {
         setAlertMessageBg("success")
         setAlertMessage("User Save Successfully")
         setShowSignupModal(false)
@@ -85,7 +87,7 @@ function Auth() {
         setShowLoginModal(true)
       } else {
         setAlertMessageBg("danger")
-        setAlertMessage(result.message)
+        setAlertMessage(output.message)
         handleClick()
       }
     } else {
@@ -110,8 +112,10 @@ function Auth() {
         "Accept": "application/json"
       }
     })
-    result = await result.json()
-    if (result.email === LoginEmailAddress) {
+    let output:any = ""
+    output = await result.json()
+//     result = await result.json()
+    if (output.email === LoginEmailAddress) {
       setAlertMessageBg("success")
       setAlertMessage("Login Successfully")
       setShowSignupModal(false)
@@ -119,10 +123,10 @@ function Auth() {
       handleClick()
       setLoginEmailAddress("")
       setLoginPassword("")
-      dispatch(LoginDetailsSave(result.id, result.email, result.Username))
+      dispatch(LoginDetailsSave(output.id, output.email, output.Username))
     } else {
       setAlertMessageBg("danger")
-      setAlertMessage(result.message)
+      setAlertMessage(output.message)
       handleClick()
     }
   }
