@@ -2,7 +2,7 @@ const initialStateList = {
     LoginDetails: []
 }
 
-function ReduxCommands(state = initialStateList, action) {
+function ReduxCommands(state = initialStateList, action: any) {
     switch (action.type) {
         case "LoginDetailsSave":
             return {
