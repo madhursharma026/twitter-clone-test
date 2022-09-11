@@ -56,7 +56,7 @@ export default function PostDetails() {
         React.useEffect(() => {
             gettingTweetDetails()
             gettingUserInfo()
-            postIdPass = JSON.parse(window.localStorage.getItem('postIdPass'))
+            postIdPass = JSON.parse(window.localStorage.getItem('postIdPass') as any)
         }, [])
     }
 
