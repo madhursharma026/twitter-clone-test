@@ -55,7 +55,7 @@ function Auth() {
     setOpen(false);
   };
 
-  async function submitSignupForm(e) {
+  async function submitSignupForm(e: React.SyntheticEvent) {
     e.preventDefault()
     if (Password === ConfirmPassword) {
       // let Username = UsernameGetting
@@ -95,7 +95,7 @@ function Auth() {
     }
   }
 
-  async function submitLoginForm(e) {
+  async function submitLoginForm(e: React.SyntheticEvent) {
     e.preventDefault()
     let profileImageName = ""
     let Username = ""
