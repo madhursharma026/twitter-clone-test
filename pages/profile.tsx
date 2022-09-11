@@ -61,7 +61,7 @@ function Profile() {
   {
     React.useEffect(() => {
       gettinguserTweetLength()
-      userIdPass = JSON.parse(window.localStorage.getItem('userIdPass'))
+      userIdPass = JSON.parse(window.localStorage.getItem('userIdPass') as any)
     }, [])
   }
 
