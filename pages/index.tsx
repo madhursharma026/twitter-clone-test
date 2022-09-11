@@ -30,17 +30,17 @@ const Home: NextPage = () => {
   const [showCommentModal, setShowCommentModal] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [TweetId, setTweetId] = React.useState("");
-  const [UserInfo, setUserInfo] = React.useState("");
+  const [UserInfo, setUserInfo] = React.useState(Object(""));
   const [loading, setloading] = React.useState(false);
   const [TweetData, setTweetData] = React.useState("");
-  const [AllTweets, setAllTweets] = React.useState([]);
+  const [AllTweets, setAllTweets] = React.useState(Object([]));
   const [ModalData, setModalData] = React.useState(false);
   const [ModalUsername, setModalUsername] = React.useState(false);
   const [AlertMessage, setAlertMessage] = React.useState("");
   const [AlertMessageBg, setAlertMessageBg] = React.useState("");
   const [TweetReplyData, setTweetReplyData] = React.useState("");
   const [ProfileNameGetting, setProfileNameGetting] = React.useState("");
-  const gettingUserDetails = useSelector((state) => state.ReduxCommands.LoginDetails);
+  const gettingUserDetails = useSelector((state: any) => state.ReduxCommands.LoginDetails);
 
   React.useEffect(() => {
     if (gettingUserDetails.length === 0) {
@@ -82,7 +82,7 @@ const Home: NextPage = () => {
   }
 
 
-  function goToProfile(userIdPass) {
+  function goToProfile(userIdPass: any) {
     if (userIdPass === gettingUserDetails[0].id) {
       router.push('/myProfile')
     } else {
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
       router.push({ pathname: '/profile', 'query': { 'userIdPass': userIdPass } })
     }
   }
-  function goToPostDetails(postIdPass) {
+  function goToPostDetails(postIdPass: any) {
     window.localStorage.setItem('postIdPass', postIdPass);
     router.push({ pathname: '/PostDetails', 'query': { 'postIdPass': postIdPass } })
   }
@@ -107,7 +107,7 @@ const Home: NextPage = () => {
     setOpen(false);
   };
 
-  async function submitTweetPostForm(e) {
+  async function submitTweetPostForm(e: React.SyntheticEvent) {
     e.preventDefault()
     let userId = `${gettingUserDetails[0].id}`
     let postData = TweetData
@@ -120,8 +120,10 @@ const Home: NextPage = () => {
         "Accept": "application/json"
       }
     })
-    result = await result.json()
-    if (result.postData === TweetData) {
+    // result = await result.json()    
+    let output:any = ""
+    output = await result.json()
+    if (output.postData === TweetData) {
       setAlertMessageBg("success")
       setAlertMessage("Tweet Successfully")
       setTweetData("")
@@ -129,12 +131,12 @@ const Home: NextPage = () => {
       handleClick()
     } else {
       setAlertMessageBg("danger")
-      setAlertMessage(result.message)
+      setAlertMessage(output.message)
       handleClick()
     }
   }
 
-  function modalOpenAndSetModalData(ModalIdGetting, ModalDataGetting, ModalUsernameGetting, ModalProfileNameGetting) {
+  function modalOpenAndSetModalData(ModalIdGetting: any, ModalDataGetting: any, ModalUsernameGetting: any, ModalProfileNameGetting: any) {
     handleShowCommentModal()
     setTweetId(ModalIdGetting)
     setModalData(ModalDataGetting)
@@ -155,8 +157,10 @@ const Home: NextPage = () => {
         "Accept": "application/json"
       }
     })
-    result = await result.json()
-    if (result.commentData === TweetReplyData) {
+    // result = await result.json() 
+    let output:any = ""
+    output = await result.json()
+    if (output.commentData === TweetReplyData) {
       setAlertMessageBg("success")
       setAlertMessage("Tweet Successfully")
       setTweetReplyData("")
@@ -164,7 +168,7 @@ const Home: NextPage = () => {
       handleClick()
     } else {
       setAlertMessageBg("danger")
-      setAlertMessage(result.message)
+      setAlertMessage(output.message)
       handleClick()
     }
   }
@@ -186,7 +190,7 @@ const Home: NextPage = () => {
             <ListItemText
               secondary={
                 <React.Fragment>
-                  <textarea style={{ width: "100%" }} className="p-2 w-100 mt-2" style={{ fontSize: "20px", height: "50px", border: "0", background: "transparent" }} placeholder="What's happening?" value={TweetData} onChange={(e) => setTweetData(e.target.value)} required autoComplete='off'></textarea>
+                  <textarea className="p-2 w-100 mt-2" style={{ width: "100%", fontSize: "20px", height: "50px", border: "0", background: "transparent" }} placeholder="What's happening?" value={TweetData} onChange={(e) => setTweetData(e.target.value)} required autoComplete='off'></textarea>
                 </React.Fragment>
               }
             />
@@ -222,7 +226,7 @@ const Home: NextPage = () => {
         {loading ?
           <>
             {
-              AllTweets.map((AllTweets, i) =>
+              AllTweets.map((AllTweets: any) =>
                 <div className='postDataHover borderBottom' style={{ cursor: "pointer" }}>
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
@@ -266,7 +270,7 @@ const Home: NextPage = () => {
           <Modal.Body>
             <ListItem alignItems="flex-start" className="p-0">
               <ListItemAvatar>
-                <Avatar alt={ModalUsername} src={`http://localhost:5000/public/${ProfileNameGetting}`} />
+                <Avatar alt={`${ModalUsername}`} src={`http://localhost:5000/public/${ProfileNameGetting}`} />
               </ListItemAvatar>
               <ListItemText
                 secondary={

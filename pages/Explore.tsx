@@ -21,17 +21,17 @@ const Explore = () => {
   const [showCommentModal, setShowCommentModal] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [TweetId, setTweetId] = React.useState("");
-  const [UserInfo, setUserInfo] = React.useState("");
+  const [UserInfo, setUserInfo] = React.useState(Object(""));
   const [loading, setloading] = React.useState(false);
   const [TweetData, setTweetData] = React.useState("");
-  const [AllTweets, setAllTweets] = React.useState([]);
+  const [AllTweets, setAllTweets] = React.useState(Object([]));
   const [ModalData, setModalData] = React.useState(false);
   const [ModalUsername, setModalUsername] = React.useState(false);
   const [AlertMessage, setAlertMessage] = React.useState("");
   const [AlertMessageBg, setAlertMessageBg] = React.useState("");
   const [TweetReplyData, setTweetReplyData] = React.useState("");
   const [ProfileNameGetting, setProfileNameGetting] = React.useState("");
-  const gettingUserDetails = useSelector((state) => state.ReduxCommands.LoginDetails);
+  const gettingUserDetails = useSelector((state: any) => state.ReduxCommands.LoginDetails);
 
   React.useEffect(() => {
     if (gettingUserDetails.length === 0) {
@@ -71,7 +71,7 @@ const Explore = () => {
     }, [])
   }
 
-  function goToProfile(userIdPass) {
+  function goToProfile(userIdPass: any) {
     if (userIdPass === gettingUserDetails[0].id) {
       router.push('/myProfile')
     } else {
@@ -79,7 +79,7 @@ const Explore = () => {
       router.push({ pathname: '/profile', 'query': { 'userIdPass': userIdPass } })
     }
   }
-  function goToPostDetails(postIdPass) {
+  function goToPostDetails(postIdPass: any) {
     window.localStorage.setItem('postIdPass', postIdPass);
     router.push({ pathname: '/PostDetails', 'query': { 'postIdPass': postIdPass } })
   }
@@ -96,7 +96,7 @@ const Explore = () => {
     setOpen(false);
   };
 
-  function modalOpenAndSetModalData(ModalIdGetting, ModalDataGetting, ModalUsernameGetting, ModalProfileNameGetting) {
+  function modalOpenAndSetModalData(ModalIdGetting: any, ModalDataGetting: any, ModalUsernameGetting: any, ModalProfileNameGetting: any) {
     handleShowCommentModal()
     setTweetId(ModalIdGetting)
     setModalData(ModalDataGetting)
@@ -117,8 +117,10 @@ const Explore = () => {
         "Accept": "application/json"
       }
     })
-    result = await result.json()
-    if (result.commentData === TweetReplyData) {
+    let output: any = ""
+    output = await result.json()
+    // result = await result.json()
+    if (output.commentData === TweetReplyData) {
       setAlertMessageBg("success")
       setAlertMessage("Tweet Successfully")
       setTweetReplyData("")
@@ -126,7 +128,7 @@ const Explore = () => {
       handleClick()
     } else {
       setAlertMessageBg("danger")
-      setAlertMessage(result.message)
+      setAlertMessage(output.message)
       handleClick()
     }
   }
@@ -138,7 +140,7 @@ const Explore = () => {
         {loading ?
           <>
             {
-              AllTweets.map((AllTweets, i) =>
+              AllTweets.map((AllTweets: any) =>
                 <div className='postDataHover borderBottom' style={{ cursor: "pointer" }}>
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
@@ -182,7 +184,7 @@ const Explore = () => {
           <Modal.Body>
             <ListItem alignItems="flex-start" className="p-0">
               <ListItemAvatar>
-                <Avatar alt={ModalUsername} src={`http://localhost:5000/public/${ProfileNameGetting}`} />
+                <Avatar alt={`${ModalUsername}`} src={`http://localhost:5000/public/${ProfileNameGetting}`} />
               </ListItemAvatar>
               <ListItemText
                 secondary={

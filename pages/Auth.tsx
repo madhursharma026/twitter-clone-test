@@ -71,9 +71,8 @@ function Auth() {
         method: "POST",
         body: formdata
       })
-    let output:any = ""
-    output = await result.json()
-//       result = await result.json()
+      let output:any = ""
+      output = await result.json()
       if (output.email === EmailAddress) {
         setAlertMessageBg("success")
         setAlertMessage("User Save Successfully")
@@ -114,7 +113,6 @@ function Auth() {
     })
     let output:any = ""
     output = await result.json()
-//     result = await result.json()
     if (output.email === LoginEmailAddress) {
       setAlertMessageBg("success")
       setAlertMessage("Login Successfully")
@@ -214,7 +212,8 @@ function Auth() {
             <TextField label="Username" className='mt-3' id="filled-size-normal" type='text' style={{ width: "300px" }} value={UsernameGetting} onChange={(e) => setUsernameGetting(e.target.value)} required autoComplete='off' /><br />
             <TextField label="Password" className='mt-3' type='password' id="filled-size-normal" style={{ width: "300px" }} value={Password} onChange={(e) => setPassword(e.target.value)} required autoComplete='off' /><br />
             <TextField label="Confirm Password" className='mt-3' type='password' id="filled-size-normal" style={{ width: "300px" }} value={ConfirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required autoComplete='off' /><br />
-            <TextField className='mt-3' type='file' id="filled-size-normal" style={{ width: "300px" }} required onChange={(e) => setUploadProfilePhoto(e.target.files[0])} accept="image/png, image/gif, image/jpeg" /><br />
+            {/* <TextField className='mt-3' type='file' id="filled-size-normal" style={{ width: "300px" }} required onChange={(e) => setUploadProfilePhoto(e.target.files[0])} accept="image/png, image/gif, image/jpeg" /><br /> */}
+            <input type="file" className='mt-3' style={{ width: "300px" }} required onChange={(e: any) => setUploadProfilePhoto(e.target.files[0])} accept="image/png, image/gif, image/jpeg" /><br />
             <button type="submit" className="btn btn-dark mt-3" style={{ width: "300px", borderRadius: "30px" }}>Sign Up</button><br />
           </form>
           <div className="my-5">

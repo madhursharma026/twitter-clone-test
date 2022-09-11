@@ -17,14 +17,14 @@ export default function PostDetails() {
 
     const router = useRouter()
     let postIdPass = router.query.postIdPass
-    const [UserInfo, setUserInfo] = React.useState("");
+    const [UserInfo, setUserInfo] = React.useState(Object(""));
     const [loading, setloading] = React.useState(false);
-    const [AllTweets, setAllTweets] = React.useState("");
+    const [AllTweets, setAllTweets] = React.useState(Object(""));
     const [AlertMessage, setAlertMessage] = React.useState("");
     const [AlertMessageBg, setAlertMessageBg] = React.useState("");
     const [TweetReplyData, setTweetReplyData] = React.useState("");
-    const [TweetCommentDetails, setTweetCommentDetails] = React.useState("");
-    const gettingUserDetails = useSelector((state) => state.ReduxCommands.LoginDetails);
+    const [TweetCommentDetails, setTweetCommentDetails] = React.useState(Object(""));
+    const gettingUserDetails = useSelector((state: any) => state.ReduxCommands.LoginDetails);
 
     async function gettingTweetDetails() {
         await fetch(`http://127.0.0.1:5000/posts/${postIdPass}`)
@@ -88,19 +88,21 @@ export default function PostDetails() {
                 "Accept": "application/json"
             }
         })
-        result = await result.json()
-        if (result.commentData === TweetReplyData) {
+        let output:any = ""
+        output = await result.json()
+        // result = await result.json()
+        if (output.commentData === TweetReplyData) {
             setAlertMessageBg("success")
             setAlertMessage("Tweet Successfully")
             setTweetReplyData("")
             gettingTweetCommentDetails()
         } else {
             setAlertMessageBg("danger")
-            setAlertMessage(result.message)
+            setAlertMessage(output.message)
         }
     }
 
-    function goToProfile(userIdPass) {
+    function goToProfile(userIdPass: any) {
         if (userIdPass === gettingUserDetails[0].id) {
             router.push('/myProfile')
         } else {
@@ -138,7 +140,7 @@ export default function PostDetails() {
                     </ListItem>
                     <>
                         {
-                            TweetCommentDetails.map((TweetCommentDetails, i) =>
+                            TweetCommentDetails.map((TweetCommentDetails: any) =>
                                 <div className='postDataHover borderBottom' style={{ cursor: "pointer" }}>
                                     <ListItem alignItems="flex-start">
                                         <ListItemAvatar>

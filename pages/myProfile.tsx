@@ -21,9 +21,9 @@ function myProfile() {
   let userIdPass = router.query.userIdPass
   const [open, setOpen] = React.useState(false);
   const [TweetId, setTweetId] = React.useState("");
-  const [UsernameDetails, setUsernameDetails] = React.useState("");
+  const [UsernameDetails, setUsernameDetails] = React.useState(Object(""));
   const [loading, setloading] = React.useState(false);
-  const [TweetData, setTweetData] = React.useState("");
+  const [TweetData, setTweetData] = React.useState(Object(""));
   const [ModalData, setModalData] = React.useState(false);
   const [AlertMessage, setAlertMessage] = React.useState("");
   const [AlertMessageBg, setAlertMessageBg] = React.useState("");
@@ -32,7 +32,7 @@ function myProfile() {
   const [ModalUsername, setModalUsername] = React.useState(false);
   const handleCloseCommentModal = () => setShowCommentModal(false);
   const [showCommentModal, setShowCommentModal] = React.useState(false);
-  const gettingUserDetails = useSelector((state) => state.ReduxCommands.LoginDetails);
+  const gettingUserDetails = useSelector((state:any) => state.ReduxCommands.LoginDetails);
 
 
 
@@ -69,12 +69,12 @@ function myProfile() {
     }, [])
   }
 
-  function goToPostDetails(postIdPass) {
+  function goToPostDetails(postIdPass: any) {
     window.localStorage.setItem('postIdPass', postIdPass);
     router.push({ pathname: '/PostDetails', 'query': { 'postIdPass': postIdPass } })
   }
 
-  function modalOpenAndSetModalData(ModalIdGetting, ModalDataGetting, ModalUsernameGetting) {
+  function modalOpenAndSetModalData(ModalIdGetting: any, ModalDataGetting: any, ModalUsernameGetting: any) {
     handleShowCommentModal()
     setTweetId(ModalIdGetting)
     setModalData(ModalDataGetting)
@@ -94,8 +94,10 @@ function myProfile() {
         "Accept": "application/json"
       }
     })
-    result = await result.json()
-    if (result.commentData === TweetReplyData) {
+    // result = await result.json()
+    let output:any = ""
+    output = await result.json()
+    if (output.commentData === TweetReplyData) {
       setAlertMessageBg("success")
       setAlertMessage("Tweet reply Successfully")
       setTweetReplyData("")
@@ -103,7 +105,7 @@ function myProfile() {
       handleClick()
     } else {
       setAlertMessageBg("danger")
-      setAlertMessage(result.message)
+      setAlertMessage(output.message)
       handleClick()
     }
   }
@@ -166,7 +168,7 @@ function myProfile() {
         {loading ?
           <>
             {
-              TweetData.map((AllTweets, i) =>
+              TweetData.map((AllTweets: any) =>
                 <div className='postDataHover borderBottom' style={{ cursor: "pointer" }}>
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
